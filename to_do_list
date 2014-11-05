@@ -1,0 +1,15 @@
+To Do
+
+Class 
+Method, called rank_worlds_around(user), takes one argument: a user.
+Method returns an array of worlds, sorted by the count of matching tags. 
+
+First method 
+Userloc is within the world radius? true or false. Keep only true ones. DONE
+The usertime is within the world active time? 
+	Distance between user and the location of the world is less than the radius of the world
+	Keep only true ones.
+Remaining array of world hashes includes key value pairs of world name, matching tags, and count of matching tags.
+Array is sorted by count. 
+
+Do it in Ruby today and then translate to Python tonight or tomorrow.
