@@ -2,7 +2,7 @@ require 'json'
 require 'date'
 require_relative "haversine.rb"
 
-class Worlds_Around
+class WorldsAround
   attr_accessor :worlds_array
   attr_reader :user, :worlds
   def initialize(user_file, worlds_file)
@@ -47,5 +47,5 @@ class Worlds_Around
   end
 end
 
-a = Worlds_Around.new('sample_user.json', 'sample_worlds.json')
+a = WorldsAround.new('sample_user.json', 'sample_worlds.json')
 a.rank_worlds

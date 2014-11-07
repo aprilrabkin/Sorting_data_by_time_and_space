@@ -1,23 +1,33 @@
 import json 
-json_user_data=open("user.json").read()
-data = json.loads(json_user_data)
-print(data)
+import haversine
+# import time
+# import datetime
+import dateutil.parser
 
-import math
+class WorldsAround(object):
+	def __init__(self):
+		json_user_data = open("sample_user.json").read()
+		self.user = json.loads(json_user_data)["user"]
+		json_worlds_list = open("sample_worlds.json").read()
+		self.worlds_list = json.loads(json_worlds_list)["data"]
 
-def distance(origin, destination):
-    lat1, lon1 = origin
-    lat2, lon2 = destination
-    radius = 6371 # km
- 
-    dlat = math.radians(lat2-lat1)
-    dlon = math.radians(lon2-lon1)
-    a = math.sin(dlat/2) * math.sin(dlat/2) + math.cos(math.radians(lat1)) \
-        * math.cos(math.radians(lat2)) * math.sin(dlon/2) * math.sin(dlon/2)
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
-    d = radius * c
- 
-    return d
+	def active_worlds(self):
+		userdatetime = dateutil.parser.parse(self.user['usertime'])
+		active_worlds_list = []
+		for worldhash in self.worlds_list:
+			if "timestart" in worldhash["time"]:
+				timestart = dateutil.parser.parse(worldhash["time"]["timestart"])
+				timeend = dateutil.parser.parse(worldhash["time"]["timeend"])
+				if timestart < userdatetime < timeend:
+					active_worlds_list.append(worldhash)
+			else:
+				active_worlds_list.append(worldhash)
+		return active_worlds_list
 
-lat1 = -73.94728440000002; lat2 = lat1 + 0.000001; long1 = 40.682783; long2 = long1
-print( distance((lat1, long1), (lat2, long2)) )
+
+  def within_worlds(self):
+    print "hello"
+
+
+a = WorldsAround()
+print a.active_worlds()

@@ -13,6 +13,3 @@ def distance(origin, destination):
     d = radius * c
  
     return d
-
-lat1 = -73.94728440000002; lat2 = lat1 + 0.000001; long1 = 40.682783; long2 = long1
-print( distance((lat1, long1), (lat2, long2)) )
