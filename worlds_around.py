@@ -20,25 +20,24 @@ class WorldsAround(object):
           active_worlds_list.append(worldhash)
       else:
         active_worlds_list.append(worldhash)
-    self.active_worlds_list = active_worlds_list
-
+    return active_worlds_list
 
   def within_worlds(self):
     userloc = self.user["userloc"]["coordinates"]
     lat1, long1 = userloc[0], userloc[1]
     within_worlds_list = []
-    for world in self.active_worlds_list:
+    for world in self.active_worlds():
       worldloc = world["loc"]["coordinates"]
       worldradius = world["radius"]
       lat2, long2 = worldloc[0], worldloc[1]
       distance = haversine.distance((lat1, long1), (lat2, long2))
       if distance < worldradius:
         within_worlds_list.append(world)
-    self.within_worlds_list = within_worlds_list
+    return within_worlds_list
 
   def rank_worlds(self):
     worlds_with_shared_tag_count = []
-    for world in self.within_worlds_list:
+    for world in self.within_worlds():
       count = 0
       for worldtag in world["tags"]:
         for usertag in self.user["tags"]:
@@ -50,6 +49,4 @@ class WorldsAround(object):
     return ranked_worlds
             
 a = WorldsAround("sample_user.json", "sample_worlds.json")
-a.active_worlds()
-a.within_worlds()
 print a.rank_worlds()
