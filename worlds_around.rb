@@ -49,6 +49,4 @@ class WorldsAround
 end
 
 a = WorldsAround.new('sample_user.json', 'sample_worlds.json')
-p a.active_worlds.count
-p a.within_worlds.count
-a.rank_worlds
+p a.rank_worlds
