@@ -10,6 +10,6 @@ def distance(origin, destination):
     a = math.sin(dlat/2) * math.sin(dlat/2) + math.cos(math.radians(lat1)) \
         * math.cos(math.radians(lat2)) * math.sin(dlon/2) * math.sin(dlon/2)
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
-    d = radius * c
+    d = radius * c * 1000 #back to meters
  
     return d

@@ -26,7 +26,8 @@ class WorldsAround
       worldloc = world["loc"]["coordinates"]
       worldradius = world["radius"]
       lat2, long2 = worldloc[0], worldloc[1]
-      haversine(lat1, long1, lat2, long2) < worldradius
+      distance = haversine(lat1, long1, lat2, long2)
+      distance < worldradius
     end
   end
   def rank_worlds
@@ -48,4 +49,6 @@ class WorldsAround
 end
 
 a = WorldsAround.new('sample_user.json', 'sample_worlds.json')
+p a.active_worlds.count
+p a.within_worlds.count
 a.rank_worlds
